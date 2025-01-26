@@ -57,7 +57,7 @@ from tensorflow.keras.layers import Input, ZeroPadding2D, Conv2D,Lambda,BatchNor
 
     output = UpSampling2D(size=(4, 4), interpolation='bilinear')(output)
     output = Conv2D(classes, 3, use_bias=False, padding='same',kernel_initializer='he_normal')(output)
-
-
+    output = Reshape((-1,classes))(output)
+    output = Softmax()(output)
 
     model=Model(inputs=inputs, outputs=output)
